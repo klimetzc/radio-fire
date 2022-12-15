@@ -1,6 +1,7 @@
 'use client';
+import 'client-only';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface IWithAuth {
@@ -9,7 +10,11 @@ interface IWithAuth {
 
 const WithAuth: React.FC<IWithAuth> = ({ children }) => {
   const router = useRouter();
-  if (!localStorage.getItem('user')) router.push('/login');
+  useEffect(() => {
+    if (!localStorage.getItem('user')) router.push('/login');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return <>{children}</>;
 };
 

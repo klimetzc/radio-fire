@@ -1,6 +1,6 @@
-import React from "react";
-import StoreProvider from "src/app/providers/StoreProvider";
-import "./globals.css";
+import React from 'react';
+import StoreProvider from 'src/app/providers/StoreProvider';
+import './globals.css';
 
 interface RootLayoutInterface {
   children: React.ReactNode;

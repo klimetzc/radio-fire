@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React from "react";
-import { Provider } from "react-redux";
-import { store } from "src/app/store";
+import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from 'src/app/store';
 
 interface IStoreProvider {
   children: React.ReactNode;

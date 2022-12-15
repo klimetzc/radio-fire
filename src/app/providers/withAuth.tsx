@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useRouter } from "next/navigation";
+import React from 'react';
+import { useRouter } from 'next/navigation';
 
 interface IWithAuth {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ interface IWithAuth {
 
 const WithAuth: React.FC<IWithAuth> = ({ children }) => {
   const router = useRouter();
-  if (!localStorage.getItem("user")) router.push("/login");
+  if (!localStorage.getItem('user')) router.push('/login');
   return <>{children}</>;
 };
 

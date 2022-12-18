@@ -20,14 +20,16 @@ const Song: React.FC<ISong> = ({ index, data }) => {
       <button type="button" className="w-[20px] h-[20px] mr-[20px]">
         <Image src={likeOutlined} alt="like" />
       </button>
-      <p className="font-medium mr-5">{data.title}</p>
+      <p className="font-medium mr-5">{data?.title || 'По умполчанию'}</p>
       {data.explicit ? (
         <p className="flex flex-col items-center justify-center w-5 h-5 rounded-sm border border-zinc-700 text-zinc-700 uppercase font-medium text-sm  select-none">
           E
         </p>
       ) : null}
-      <p className="ml-auto mr-[50px] text-zinc-500">{data.auditions}</p>
-      <p className="text-zinc-300">{data.duration}</p>
+      <p className="ml-auto mr-[50px] text-zinc-500">
+        {data?.auditions || '0'}
+      </p>
+      <p className="text-zinc-300">{data?.duration || '0:0'}</p>
     </div>
   );
 };

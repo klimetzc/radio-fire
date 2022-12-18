@@ -21,7 +21,7 @@ const Song: React.FC<ISong> = ({ index, data }) => {
         <Image src={likeOutlined} alt="like" />
       </button>
       <p className="font-medium mr-5">{data?.title || 'По умполчанию'}</p>
-      {data.explicit ? (
+      {data?.explicit ? (
         <p className="flex flex-col items-center justify-center w-5 h-5 rounded-sm border border-zinc-700 text-zinc-700 uppercase font-medium text-sm  select-none">
           E
         </p>

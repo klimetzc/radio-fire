@@ -1,5 +1,6 @@
 import React from 'react';
 import AlbumPage from 'src/pages/AlbumPage/AlbumPage';
+import AudioPlayer from 'src/widgets/AudioPlayer/AudioPlayer';
 
 interface IAlbumPage {
   params: {
@@ -12,6 +13,7 @@ const Page: React.FC<IAlbumPage> = ({ params }) => {
     <div>
       page id = {params.albumId}
       <AlbumPage />
+      <AudioPlayer />
     </div>
   );
 };

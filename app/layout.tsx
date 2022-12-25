@@ -8,7 +8,7 @@ interface RootLayoutInterface {
 
 const RootLayout: React.FC<RootLayoutInterface> = ({ children }) => {
   return (
-    <html lang="en">
+    <html lang="ru">
       <head />
       <body>
         <StoreProvider>{children}</StoreProvider>

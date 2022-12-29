@@ -42,19 +42,21 @@ const AlbumPage: React.FC<IAlbumPage> = ({ list }) => {
           </div>
         </div>
         <div className="flex flex-col">
-          {list.map((item, index) => (
-            <Song
-              key={++songId}
-              index={index + 1}
-              data={{
-                id: `${songId}`,
-                title: item,
-                auditions: '300 000',
-                duration: '1:40',
-                explicit: Math.random() < 0.5,
-              }}
-            />
-          ))}
+          {list?.length
+            ? list.map((item, index) => (
+                <Song
+                  key={++songId}
+                  index={index + 1}
+                  data={{
+                    id: `${songId}`,
+                    title: item,
+                    auditions: '300 000',
+                    duration: '1:40',
+                    explicit: Math.random() < 0.5,
+                  }}
+                />
+              ))
+            : 'not a valid list'}
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import AlbumPage from 'src/pages/AlbumPage/AlbumPage';
+import { getTempSongs } from 'src/shared/api';
 import AudioPlayer from 'src/widgets/AudioPlayer/AudioPlayer';
 
 interface IAlbumPage {
@@ -8,14 +9,13 @@ interface IAlbumPage {
   };
 }
 
-const Page: React.FC<IAlbumPage> = ({ params }) => {
+export default async function Page({ params }: IAlbumPage) {
+  const songs = await getTempSongs();
+
   return (
     <div>
-      page id = {params.albumId}
-      <AlbumPage />
+      <AlbumPage list={songs} />
       <AudioPlayer />
     </div>
   );
-};
-
-export default Page;
+}

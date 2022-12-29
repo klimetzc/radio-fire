@@ -1,6 +1,10 @@
-import React from 'react';
+'use client';
+
+import React, { useContext } from 'react';
 import Image from 'next/image';
 import likeOutlined from '../../../shared/assets/icons/like_outline.svg';
+import { CurrentSong } from 'src/app/providers/SongProvider';
+import classNames from 'classnames';
 
 export interface ISong {
   index: number;
@@ -14,13 +18,25 @@ export interface ISong {
 }
 
 const Song: React.FC<ISong> = ({ index, data }) => {
+  const [song, setSong] = useContext(CurrentSong);
+
   return (
     <div className="flex w-full items-center pt-2 pb-2 text-lg">
       <p className="mr-[27px] w-2 font-medium">{index}</p>
       <button type="button" className="w-[20px] h-[20px] mr-[20px]">
         <Image src={likeOutlined} alt="like" />
       </button>
-      <p className="font-medium mr-5">{data?.title || 'По умполчанию'}</p>
+      <p
+        className={classNames(
+          'font-medium mr-5 hover:text-blue-600 transition cursor-pointer',
+          data?.title === song ? 'text-blue-500' : false
+        )}
+        onClick={() => {
+          setSong!(data?.title || 'Chiquitita');
+        }}
+      >
+        {data?.title || 'По умолчанию'}
+      </p>
       {data?.explicit ? (
         <p className="flex flex-col items-center justify-center w-5 h-5 rounded-sm border border-zinc-700 text-zinc-700 uppercase font-medium text-sm  select-none">
           E

@@ -2,39 +2,15 @@ import React from 'react';
 import mockAlbum from '../../shared/assets/images/album.png';
 import likeOutline from '../../shared/assets/icons/like_outline.svg';
 import Image from 'next/image';
-import Song, { ISong } from './layout/Song';
+import Song from './layout/Song';
 
-const mockSongs: Partial<ISong>[] = [
-  {
-    data: {
-      id: '1',
-      title: 'Профессионал',
-      auditions: '1 130 300',
-      duration: '1:40',
-      explicit: false,
-    },
-  },
-  {
-    data: {
-      id: '2',
-      title: 'Люди',
-      auditions: '640 784',
-      duration: '2:15',
-      explicit: true,
-    },
-  },
-  {
-    data: {
-      id: '3',
-      title: 'Альтернатива',
-      auditions: '250 650',
-      duration: '3:02',
-      explicit: false,
-    },
-  },
-];
+let songId = 1;
 
-const AlbumPage = () => {
+interface IAlbumPage {
+  list: string[];
+}
+
+const AlbumPage: React.FC<IAlbumPage> = ({ list }) => {
   return (
     <div className="pt-[100px] flex flex-col items-center">
       <div className="w-[800px]">
@@ -66,8 +42,18 @@ const AlbumPage = () => {
           </div>
         </div>
         <div className="flex flex-col">
-          {mockSongs.map((item, index) => (
-            <Song key={item?.data?.id} index={index + 1} data={item?.data!} />
+          {list.map((item, index) => (
+            <Song
+              key={++songId}
+              index={index + 1}
+              data={{
+                id: `${songId}`,
+                title: item,
+                auditions: '300 000',
+                duration: '1:40',
+                explicit: Math.random() < 0.5,
+              }}
+            />
           ))}
         </div>
       </div>

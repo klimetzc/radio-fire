@@ -1,4 +1,5 @@
 import React from 'react';
+import SongProvider from 'src/app/providers/SongProvider';
 import StoreProvider from 'src/app/providers/StoreProvider';
 import './globals.css';
 
@@ -11,7 +12,9 @@ const RootLayout: React.FC<RootLayoutInterface> = ({ children }) => {
     <html lang="ru">
       <head />
       <body>
-        <StoreProvider>{children}</StoreProvider>
+        <StoreProvider>
+          <SongProvider>{children}</SongProvider>
+        </StoreProvider>
       </body>
     </html>
   );

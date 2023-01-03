@@ -1,6 +1,6 @@
 import React from 'react';
 import AlbumPage from 'src/pages/AlbumPage/AlbumPage';
-import { getTempSongs } from 'src/shared/api';
+import { getTempSongs, login } from 'src/shared/api';
 import AudioPlayer from 'src/widgets/AudioPlayer/AudioPlayer';
 
 interface IAlbumPage {
@@ -10,7 +10,10 @@ interface IAlbumPage {
 }
 
 export default async function Page({ params }: IAlbumPage) {
-  const songs = await getTempSongs();
+  const token = await login();
+  const songs = await getTempSongs(token.data);
+
+  console.log('songs:', songs);
 
   return (
     <div>

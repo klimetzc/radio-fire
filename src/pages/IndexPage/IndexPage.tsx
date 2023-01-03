@@ -13,6 +13,7 @@ const IndexPage = () => {
       >
         Link to landing/promo page
       </Link>
+      <Link href="/albums/testAlbum">Тестовый альбом</Link>
     </>
   );
 };

@@ -1,101 +1,89 @@
 'use client';
-import React, { useEffect, useState, useRef, useContext } from 'react';
-import { CurrentSong } from 'src/app/providers/SongProvider';
 
-let audio: HTMLAudioElement;
+import React, { useEffect, useState, useContext } from 'react';
+import { CurrentSong } from 'src/app/providers/SongProvider';
+import * as S from './AudioPlayer.styles';
+import mockImage from 'src/shared/assets/images/album.png';
+
+const toMMSS = (seconds: number): string => {
+  if (!seconds) return '00:00';
+  return new Date(+seconds.toFixed(0) * 1000).toISOString().substring(14, 19);
+};
 
 const AudioPlayer = () => {
   const [song, setSong] = useContext(CurrentSong);
-  // const [audioElem, setAudioElem] = useState(
-  //   new Audio('http://213.234.25.62:10050/api/v1/audio/play')
-  // );
-  // const [playing, setPlaying] = useState<boolean>(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
-  // const [audioSrc, setAudioSrc] = useState<string>(
-  //   'http://213.234.25.62:10050/api/v1/audio/play'
-  // );
-  // const [audioRed] = useState(audioElem);
+  const [audio, setAudio] = useState<HTMLAudioElement>(
+    // new Audio(`http://213.234.25.62:10050/api/v1/audio/${song}`)
+    new Audio('http://jplayer.org/audio/mp3/RioMez-01-Sleep_together.mp3')
+  );
+  const [currentTime, setCurrentTime] = useState<string>('0');
+  const [volume, setVolume] = useState<number>(audio?.volume || 1);
+  const [playing, setPlaying] = useState<boolean>(false);
 
-  const refreshAudio = () => {
-    // audioElem.pause();
-    // setAudioElem(new Audio('http://213.234.25.62:10050/api/v1/audio/play'));
-    // setPlaying(true);
-    // audioElem.removeAttribute('src');
-    // audioElem.src = 'http://213.234.25.62:10050/api/v1/audio/play';
-    // audioElem.play();
-    // console.log('here');
-    // audioRef.current?.removeAttribute('src');
-    // audioRef.current!.src = 'http://213.234.25.62:10050/api/v1/audio/play';
-    // audioRef.current?.play();
-    // setAudioSrc('http://213.234.25.62:10050/api/v1/audio/play');
+  const handleTimeupdate = () => {
+    setCurrentTime(`${audio.currentTime}`);
+  };
+  const handlePlay = () => {
+    setPlaying(true);
+  };
+  const handlePause = () => {
+    setPlaying(false);
   };
 
-  const handleEnded = () => {
-    console.log('audio ended');
-  };
+  useEffect(() => {
+    // setAudio(new Audio(`http://213.234.25.62:10050/api/v1/audio/${song}`));
+    audio.addEventListener('timeupdate', handleTimeupdate);
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
 
-  // const fetchMusic = () => {
-  //   console.log('working fetch music');
-  //   fetch('http://213.234.25.62:10050/api/v1/audio/play')
-  //     .then((res) => {
-  //       console.log(res);
-  //       return res.arrayBuffer();
-  //     })
-  //     .then((res) => {
-  //       return actx.decodeAudioData(res);
-  //     })
-  //     .then((decodedAudio) => {
-  //       const playSound = actx.createBufferSource();
-  //       playSound.buffer = decodedAudio;
-  //       playSound.connect(actx.destination);
-  //       playSound.start(actx.currentTime);
-  //     });
-  // };
+    return () => {
+      audio.removeEventListener('timeupdate', handleTimeupdate);
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
+    };
+  }, [song]);
 
-  // useEffect(() => {
-  //   fetchMusic();
-  //   audioElem.addEventListener('');
-  //   audioElem.addEventListener('ended', refreshAudio);
-  //   if (!audio) {
-  //     audio = new Audio();
-  //   }
-  //   fetch('http://213.234.25.62:10050/api/v1/audio/all')
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => console.log('data: ', data));
-  // }, []);
+  useEffect(() => {
+    audio.volume = volume;
+  }, [volume]);
 
   return (
-    <div className="border-red-600 w-full bg-neutral-800 bg-opacity-90 backdrop-blur-md fixed bottom-0 z-50 flex items-center px-5 py-2 gap-1">
-      <div className="flex flex-col">
-        <p className="text-white font-medium">Исполнитель</p>
-        <p className="text-zinc-500">Название</p>
-      </div>
-      <button
-        type="button"
+    <S.AudioPlayer>
+      <S.AudioTrackBackground />
+      <S.AudioTrack percent={(+currentTime * 100) / audio.duration} />
+      <S.CurrentDuration>{toMMSS(+currentTime)}</S.CurrentDuration>
+      <S.TotalDuration>{toMMSS(audio.duration) || 0}</S.TotalDuration>
+      <S.SongInfo className="flex flex-col">
+        <S.SongImage src={mockImage} alt="Обложка песни" />
+        <div>
+          <S.ArtistName className="text-white font-medium">
+            Исполнитель
+          </S.ArtistName>
+          <S.SongTitle className="text-zinc-500">Название</S.SongTitle>
+        </div>
+      </S.SongInfo>
+
+      <S.PlayPause
+        isPlaying={playing}
         onClick={() => {
-          console.log(audio);
-          refreshAudio();
+          if (playing) {
+            audio.pause();
+          } else {
+            audio.play();
+          }
         }}
-        className="bg-blue-700 rounded-md p-1"
-      >
-        fetch song
-      </button>
-      <audio
-        onEnded={handleEnded}
-        src={`http://213.234.25.62:10050/api/v1/audio/${song}`}
-        controls
-        ref={audioRef}
-      >
-        Ваш браузер не поддерживает встроенное аудио.
-      </audio>
-      {/* <ReactAudioPlayer src={audioSrc} controls /> */}
-      {/* <div className="flex">
-        Duration {`${playing ? audioElem.duration : 'not playing'} `}
-        Raw - {audioRef.current?.duration}
-      </div> */}
-    </div>
+      />
+      <S.VolumeControl
+        type="range"
+        defaultValue={audio?.volume || 1}
+        min={0}
+        max={1}
+        step={0.01}
+        onChange={(e) => {
+          setVolume(+e.target.value);
+        }}
+      />
+    </S.AudioPlayer>
   );
 };
 

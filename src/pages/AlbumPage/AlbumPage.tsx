@@ -12,7 +12,7 @@ interface IAlbumPage {
 
 const AlbumPage: React.FC<IAlbumPage> = ({ list }) => {
   return (
-    <div className="pt-[100px] flex flex-col items-center">
+    <div className="pt-[100px] pb-[120px] flex flex-col items-center">
       <div className="w-[800px]">
         <div className="album-head flex gap-5 mb-8 w-full">
           <Image

@@ -81,7 +81,7 @@ const AudioPlayer = () => {
           <S.SongTitle className="text-zinc-500">Название</S.SongTitle>
         </div>
       </S.SongInfo>
-
+      <S.SkipBtn prev />
       <S.PlayPause
         isPlaying={playing}
         onClick={() => {
@@ -92,6 +92,8 @@ const AudioPlayer = () => {
           }
         }}
       />
+      <S.SkipBtn prev={false} />
+      <S.LikeBtn />
       <S.VolumeControl
         type="range"
         defaultValue={audio?.volume || 1}

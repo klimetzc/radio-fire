@@ -4,6 +4,9 @@ import Image from 'next/image';
 import PauseCircle from '../../shared/assets/icons/pause-circle.svg';
 import PlayCircle from '../../shared/assets/icons/play-circle.svg';
 import VolumeSvg from '../../shared/assets/icons/volume.svg';
+import PrevSvg from '../../shared/assets/icons/skip-prev.svg';
+import NextSvg from '../../shared/assets/icons/skip-next.svg';
+import LikeSvg from '../../shared/assets/icons/like_outline.svg';
 
 export const AudioPlayer = styled.div`
   border: rgb(220 38 38/ 0.6);
@@ -30,8 +33,10 @@ export const SongInfo = styled.div`
 
 export const SongImage = styled(Image)`
   object-fit: cover;
+  object-position: center;
   height: 50px;
   width: 50px;
+  border-radius: 5px;
 `;
 
 export const ArtistName = styled.p`
@@ -99,7 +104,6 @@ export const TotalDuration = styled.span`
 `;
 
 export const VolumeControl = styled.input`
-  margin-left: auto;
   width: auto;
   background-color: red;
   height: 5px;
@@ -120,14 +124,21 @@ interface IPlayPause {
   isPlaying: boolean;
 }
 
-export const PlayPause = styled.button<IPlayPause>`
+const btnTemplate = css`
   width: 26px;
   height: 26px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   transition: 0.2s;
-  margin-right: 20px;
+
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+export const PlayPause = styled.button<IPlayPause>`
+  ${btnTemplate}
   ${(props) => {
     switch (props.isPlaying) {
       case true:
@@ -140,4 +151,31 @@ export const PlayPause = styled.button<IPlayPause>`
         `;
     }
   }}
+`;
+
+interface ISkipBtn {
+  prev: boolean;
+}
+
+export const SkipBtn = styled.button<ISkipBtn>`
+  ${btnTemplate}
+  ${(props) => {
+    switch (props.prev) {
+      case true:
+        return css`
+          background-image: url(${PrevSvg?.src});
+        `;
+      default:
+        return css`
+          background-image: url(${NextSvg?.src});
+        `;
+    }
+  }}
+`;
+
+export const LikeBtn = styled.button`
+  ${btnTemplate}
+  margin-left: auto;
+  margin-right: 50px;
+  background-image: url(${LikeSvg?.src});
 `;

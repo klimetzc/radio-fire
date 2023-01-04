@@ -10,6 +10,10 @@ const toMMSS = (seconds: number): string => {
   return new Date(+seconds.toFixed(0) * 1000).toISOString().substring(14, 19);
 };
 
+interface KeydownEvent extends Event {
+  code: string;
+}
+
 const AudioPlayer = () => {
   const [song, setSong] = useContext(CurrentSong);
   const [audio, setAudio] = useState<HTMLAudioElement>(
@@ -30,13 +34,28 @@ const AudioPlayer = () => {
     setPlaying(false);
   };
 
+  const handleKeydown = (e: KeydownEvent) => {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      if (!audio.paused) {
+        audio.pause();
+        setPlaying(false);
+      } else {
+        setPlaying(true);
+        audio.play();
+      }
+    }
+  };
+
   useEffect(() => {
     // setAudio(new Audio(`http://213.234.25.62:10050/api/v1/audio/${song}`));
+    document.addEventListener('keydown', handleKeydown);
     audio.addEventListener('timeupdate', handleTimeupdate);
     audio.addEventListener('play', handlePlay);
     audio.addEventListener('pause', handlePause);
 
     return () => {
+      document.removeEventListener('keydown', handleKeydown);
       audio.removeEventListener('timeupdate', handleTimeupdate);
       audio.removeEventListener('play', handlePlay);
       audio.removeEventListener('pause', handlePause);

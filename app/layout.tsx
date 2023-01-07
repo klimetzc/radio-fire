@@ -1,6 +1,7 @@
 import React from 'react';
 import SongProvider from 'src/app/providers/SongProvider';
 import StoreProvider from 'src/app/providers/StoreProvider';
+import StyledComponentsRegistry from 'src/app/providers/StyledComponentsRegistry';
 import SearchBar from 'src/widgets/SearchBar/SearchBar';
 import Sidebar from 'src/widgets/Sidebar/Sidebar';
 import './globals.css';
@@ -16,13 +17,15 @@ const RootLayout: React.FC<RootLayoutInterface> = ({ children }) => {
       <body>
         <StoreProvider>
           <SongProvider>
-            <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr' }}>
-              <Sidebar />
-              <main style={{ width: '100%' }}>
-                <SearchBar />
-                {children}
-              </main>
-            </div>
+            <StyledComponentsRegistry>
+              <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr' }}>
+                <Sidebar />
+                <main style={{ width: '100%' }}>
+                  <SearchBar />
+                  {children}
+                </main>
+              </div>
+            </StyledComponentsRegistry>
           </SongProvider>
         </StoreProvider>
       </body>

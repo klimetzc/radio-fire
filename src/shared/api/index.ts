@@ -12,6 +12,7 @@ export const getTempSongs = async (token: string) => {
       },
     })
     .then((res: AxiosResponse) => {
+      console.log('fetch success');
       return res.data;
     })
     .catch((err: AxiosError) => {

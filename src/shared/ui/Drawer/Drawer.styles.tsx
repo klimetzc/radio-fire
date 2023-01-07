@@ -1,3 +1,5 @@
+'use client';
+
 import styled, { css } from 'styled-components';
 
 import CloseIcon from '../../../shared/assets/icons/close-rounded.svg';

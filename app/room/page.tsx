@@ -1,7 +1,5 @@
 import React from 'react';
+import RoomPage from 'src/pages/RoomPage/RoomPage';
 
-const page = () => {
-  return <div>i am room</div>;
-};
-
+const page = () => <RoomPage />;
 export default page;

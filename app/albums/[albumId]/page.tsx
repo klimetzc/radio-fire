@@ -11,8 +11,9 @@ interface IAlbumPage {
 
 export default async function Page({ params }: IAlbumPage) {
   const token = await login();
-  const songs = await getTempSongs(token.data);
+  console.log('token: ', token?.data);
 
+  const songs = await getTempSongs(token?.data);
   console.log('songs:', songs);
 
   return (

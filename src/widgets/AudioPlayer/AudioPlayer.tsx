@@ -49,13 +49,13 @@ const AudioPlayer = () => {
 
   useEffect(() => {
     // setAudio(new Audio(`http://213.234.25.62:10050/api/v1/audio/${song}`));
-    document.addEventListener('keydown', handleKeydown);
+    window.addEventListener('keydown', handleKeydown);
     audio.addEventListener('timeupdate', handleTimeupdate);
     audio.addEventListener('play', handlePlay);
     audio.addEventListener('pause', handlePause);
 
     return () => {
-      document.removeEventListener('keydown', handleKeydown);
+      window.removeEventListener('keydown', handleKeydown);
       audio.removeEventListener('timeupdate', handleTimeupdate);
       audio.removeEventListener('play', handlePlay);
       audio.removeEventListener('pause', handlePause);

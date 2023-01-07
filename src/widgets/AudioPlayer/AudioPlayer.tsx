@@ -4,6 +4,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import { CurrentSong } from 'src/app/providers/SongProvider';
 import * as S from './AudioPlayer.styles';
 import mockImage from 'src/shared/assets/images/album.png';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/app/store';
 
 const toMMSS = (seconds: number): string => {
   if (!seconds) return '00:00';
@@ -15,6 +17,9 @@ interface KeydownEvent extends Event {
 }
 
 const AudioPlayer = () => {
+  const musicRedux = useSelector<RootState>(
+    (state) => state.musicReducer.music
+  ) as string;
   const [song, setSong] = useContext(CurrentSong);
   const [audio, setAudio] = useState<HTMLAudioElement>(
     // new Audio(`http://213.234.25.62:10050/api/v1/audio/${song}`)
@@ -78,7 +83,7 @@ const AudioPlayer = () => {
           <S.ArtistName className="text-white font-medium">
             Исполнитель
           </S.ArtistName>
-          <S.SongTitle className="text-zinc-500">Название</S.SongTitle>
+          <S.SongTitle className="text-zinc-500">{musicRedux}</S.SongTitle>
         </div>
       </S.SongInfo>
       <S.SkipBtn prev />

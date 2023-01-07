@@ -12,14 +12,15 @@ export const AudioPlayer = styled.div`
   border: rgb(220 38 38/ 0.6);
   width: 100%;
   background-color: rgb(38 38 38/ 0.8);
-  position: fixed;
+  position: sticky;
+  margin-top: auto;
   bottom: 0;
   z-index: 50;
   display: flex;
   align-items: center;
   padding: 22px 20px 8px;
   gap: 5px;
-  position: fixed;
+  /* position: fixed; */
   box-sizing: border-box;
   backdrop-filter: blur(10px);
 `;

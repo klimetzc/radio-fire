@@ -16,7 +16,10 @@ export default async function Page({ params }: IAlbumPage) {
   console.log('songs:', songs);
 
   return (
-    <div>
+    <div
+      className="flex flex-col justify-between min-h-screen"
+      style={{ minHeight: '100vh' }}
+    >
       <AlbumPage list={songs} />
       <AudioPlayer />
     </div>

@@ -67,7 +67,7 @@ const AudioPlayer = () => {
   }, [volume]);
 
   return (
-    <S.AudioPlayer>
+    <S.AudioPlayer id="audio-player">
       <S.AudioTrackBackground />
       <S.AudioTrack percent={(+currentTime * 100) / audio.duration} />
       <S.CurrentDuration>{toMMSS(+currentTime)}</S.CurrentDuration>

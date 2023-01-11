@@ -88,6 +88,7 @@ const AudioPlayer = () => {
       </S.SongInfo>
       <S.SkipBtn prev />
       <S.PlayPause
+        data-testid="AudioPlayer__play-pause"
         isPlaying={playing}
         onClick={() => {
           if (playing) {

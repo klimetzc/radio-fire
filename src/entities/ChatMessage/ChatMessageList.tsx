@@ -2,7 +2,7 @@ import React from 'react';
 import ChatMessage from './ChatMessage';
 import * as S from './ChatMessageList.styles';
 
-type message = { content: string; timestamp: number };
+type message = { content: string; timestamp: number | string };
 
 interface IChatMessageList {
   messages: message[];

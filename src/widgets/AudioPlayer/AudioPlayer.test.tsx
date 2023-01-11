@@ -1,20 +1,21 @@
 import React from 'react';
-import SongProvider from 'src/app/providers/SongProvider';
 import AudioPlayer from './AudioPlayer';
-import { render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from 'src/app/store';
-
+import RootProvider from 'src/app/providers';
 describe('<AudioPlayer />', () => {
   test('renders <AudioPlayer />', async () => {
     const comp = render(
-      <Provider store={store}>
-        <SongProvider>
-          <AudioPlayer />
-        </SongProvider>
-      </Provider>
+      <RootProvider>
+        <AudioPlayer />
+      </RootProvider>
     );
     expect(comp.container.querySelector('#audio-player')).toBeInTheDocument();
+
+    // const playBtn = screen.getByTestId('AudioPlayer__play-pause');
+    // fireEvent.click(playBtn);
+    // expect(playBtn.getAttribute('isPlaying')).toBe(true);
   });
 });
 

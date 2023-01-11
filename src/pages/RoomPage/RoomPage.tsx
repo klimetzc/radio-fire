@@ -1,17 +1,27 @@
-import React from 'react';
-import ChatMessageList from 'src/entities/ChatMessage/ChatMessageList';
+'use client';
 
-const mockData = [
-  { content: 'Hello', timestamp: 1234 },
-  { content: 'Hello 2', timestamp: 1230 },
-];
+import React, { useContext } from 'react';
+import ChatMessageList from 'src/entities/ChatMessage/ChatMessageList';
+import EnterMessage from 'src/features/chat/ui/EnterMessage';
+import RoomPageContext, { ChatContext } from './RoomPageContext';
 
 const RoomPage = () => {
+  const [messages, setMessages] = useContext(ChatContext);
+
   return (
-    <div className="flex flex-col items-center w-full p-6">
-      <ChatMessageList messages={mockData} />
+    <div className="flex flex-col items-center justify-between w-full p-6 pb-0 min-h-[90vh]">
+      <ChatMessageList messages={messages!} />
+      <EnterMessage />
     </div>
   );
 };
 
-export default RoomPage;
+const RoomPageWithContext = () => {
+  return (
+    <RoomPageContext>
+      <RoomPage />
+    </RoomPageContext>
+  );
+};
+
+export default RoomPageWithContext;

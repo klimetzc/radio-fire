@@ -3,7 +3,7 @@ import * as S from './ChatMessage.styles';
 
 interface IChatMessage {
   data: {
-    timestamp: number;
+    timestamp: number | string;
     content: string;
   };
 }

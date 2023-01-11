@@ -8,8 +8,28 @@ export const InputMessage = styled.div`
   padding: 10px;
   position: sticky;
   bottom: 10px;
-  border-radius: 5px;
-  background-color: gray;
+  border: 2px solid #282828;
+  border-radius: 10px;
+  background-color: transparent;
   margin: 10px;
   margin-top: auto;
+  color: white;
+
+  &:focus {
+    outline: none;
+    border-color: #1c4cc7;
+  }
+
+  &:hover:not(:focus) {
+    border-color: #4d4d4d;
+  }
+
+  &[placeholder]:empty::before {
+    content: attr(placeholder);
+    color: #5b5b5b;
+  }
+
+  &[placeholder]:empty:focus::before {
+    content: '';
+  }
 `;

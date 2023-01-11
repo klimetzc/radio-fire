@@ -37,9 +37,8 @@ const EnterMessage = () => {
       tabIndex={-1}
       onKeyDown={handleKeydown}
       ref={MessageBox}
-    >
-      EnterMessage
-    </S.InputMessage>
+      placeholder="Enter message"
+    ></S.InputMessage>
   );
 };
 

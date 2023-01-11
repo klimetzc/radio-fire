@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import * as S from './ChatMessage.styles';
 
@@ -8,10 +9,15 @@ interface IChatMessage {
   };
 }
 
+const getMMSSTime = (timestamp: string | number): string => {
+  return moment(new Date(timestamp)).format('HH:mm');
+};
+
 const ChatMessage: React.FC<IChatMessage> = ({ data }) => {
   return (
     <S.Message>
-      {data?.content || 'error message'} - {data?.timestamp || 'error time'}
+      {data?.content || 'error message'}
+      <S.Time>{getMMSSTime(data?.timestamp) || '00:00'}</S.Time>
     </S.Message>
   );
 };

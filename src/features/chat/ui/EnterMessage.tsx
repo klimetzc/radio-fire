@@ -23,7 +23,7 @@ const EnterMessage = () => {
           ...messages!,
           {
             content: event.currentTarget.textContent!,
-            timestamp: `${Date.now()}`,
+            timestamp: `${new Date()}`,
           },
         ]);
       }

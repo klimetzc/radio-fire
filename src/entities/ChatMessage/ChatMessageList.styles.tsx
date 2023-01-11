@@ -7,4 +7,9 @@ export const List = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
+
+  @media screen and (max-width: 600px) {
+    align-items: stretch;
+    width: 100%;
+  }
 `;

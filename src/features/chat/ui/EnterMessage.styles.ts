@@ -10,10 +10,12 @@ export const InputMessage = styled.div`
   bottom: 10px;
   border: 2px solid #282828;
   border-radius: 10px;
-  background-color: transparent;
+  background-color: #161616;
   margin: 10px;
   margin-top: auto;
   color: white;
+  max-height: 10rem;
+  overflow-y: auto;
 
   &:focus {
     outline: none;

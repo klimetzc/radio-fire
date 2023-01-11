@@ -12,8 +12,14 @@ export const ChatContext = createContext<
 >([]);
 
 const mockData = [
-  { content: 'Hello', timestamp: '1234' },
-  { content: 'Hello 2', timestamp: '1230' },
+  {
+    content: 'Hello',
+    timestamp: 'Wed Jan 11 2023 14:12:43 GMT+0300 (Москва, стандартное время)',
+  },
+  {
+    content: 'Hello 2',
+    timestamp: 'Wed Jan 11 2023 14:21:43 GMT+0300 (Москва, стандартное время)',
+  },
 ];
 
 const RoomPageContext = ({ children }: PropsWithChildren) => {

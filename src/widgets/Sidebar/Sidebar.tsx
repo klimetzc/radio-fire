@@ -25,6 +25,7 @@ const Sidebar = () => {
           <S.SidebarLink href="/promo">Лендинг</S.SidebarLink>
           <S.SidebarLink href="/albums/testAlbum">Альбомы</S.SidebarLink>
           <S.SidebarLink href="/room">Чат</S.SidebarLink>
+          <S.SidebarLink href="/users/100500/playlists">Плейлист</S.SidebarLink>
         </S.Content>
       </Drawer>
     </>
